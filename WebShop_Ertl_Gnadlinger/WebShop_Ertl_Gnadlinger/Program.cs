@@ -6,6 +6,27 @@
         {
             Console.WriteLine("Hello, World!");
 
+            //Menu:
+            //    - Nutzerdaten ändern
+
+            //    - Productübersicht
+            //        + Produkte warenkorb hinzufügen
+
+            //    - Warenkorb
+            //        + Löschen
+            //        + Bestellen
+            //            * Bestellübersicht
+            //                # Bestätigen
+            //                # Abbrechen
+
+
+
+
+
+
+
+
+
         }
     }
 }
