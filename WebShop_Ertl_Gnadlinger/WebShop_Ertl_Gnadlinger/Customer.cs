@@ -31,6 +31,11 @@ namespace WebShop_Ertl_Gnadlinger
             get { return _name; }
         }
 
+        public string[] Address
+        {
+            get { return _address; }
+        }
+
 
         //---------methods------------
 
@@ -45,7 +50,7 @@ namespace WebShop_Ertl_Gnadlinger
                     //Nein exeption
 
 
-            } while (!success);
+            } while (success);  //gehört ein !success
 
             _name = nameInput;
 
@@ -53,7 +58,7 @@ namespace WebShop_Ertl_Gnadlinger
 
         public void InputAddress(string[] addressInput)
         {
-            //gets Address from main like a = { Street, street number, postler number, city}
+            //gets Address from main like a = { Street, house number, postler number, city}
            // array kommt als string
            //komplette überprüfung, jedes Element
 

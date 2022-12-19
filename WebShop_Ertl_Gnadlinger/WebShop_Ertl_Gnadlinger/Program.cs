@@ -1,4 +1,5 @@
-﻿using System.IO.Pipes;
+﻿using System.ComponentModel.DataAnnotations;
+using System.IO.Pipes;
 
 namespace WebShop_Ertl_Gnadlinger
 {
@@ -100,22 +101,49 @@ namespace WebShop_Ertl_Gnadlinger
         static public void EnterChangeUser(Customer user)
         {
             string Input;
-            bool success = false;
+            bool success = false;   
+
             do
             {
                 try
                 {
-                    Console.WriteLine("Please Enter your Name:");
-                    Input = Console.ReadLine();
-                    user.InputName(Input);
+                    if(user.Name == null)   //query if there is already a name entered or not
+                    {
+                        Console.WriteLine("Please Enter your Name:");
+                        Input = Console.ReadLine();
+                        user.InputName(Input);              // input verification in the class, method "InputName"
 
-                    //address
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The current Name is: {user.Name}\n");
+                        Console.WriteLine("Please enter the new name: ");
+                        user.InputName(Console.ReadLine());
+                    }
+                    
+                    if(user.Address == null)
+                    {
+                        string[] addressArray = new string[3]; //initialises an array if none exists yet
+                        addressArray = AddressInput();
+                        
+                        user.InputAddress(addressArray);   // input verification in the class, method "InputAddress"
+                    }
+                    else
+                    {
+                        string[] NewaddressArray = new string[3];
 
+                        Console.WriteLine("\nThe current address is: \n");
+                        for (int i = 0; i < user.Address.Length; i++) 
+                        {
+                            Console.WriteLine("\t" + user.Address[i]);  //shows the user the current address
+                        }
 
+                        NewaddressArray = AddressInput();
 
+                        user.InputAddress(NewaddressArray);
+                    }
 
-
-                    success = true;
+                    success = true;         //if everthing is alright (no exception) the do-while ends
                 }
                 catch (Exception ex)
                 {
@@ -124,9 +152,27 @@ namespace WebShop_Ertl_Gnadlinger
 
             } while (!success);
 
-           
+            Console.WriteLine("\nVery Good, you changed your data!\n");
+
+            MenuInput();
         }
 
+        public static string[] AddressInput()       //only for the Input of the address, input verification in the class
+        {
+            string[] Input = new string[3];
+                        
+                Console.WriteLine("\nPlease Enter your new address in the following form:");
+                Console.WriteLine("\n-1 Enter your street: ");
+                Input[0] = Console.ReadLine();
+                Console.WriteLine("\n-2 Enter your house number: ");
+                Input[1] = Console.ReadLine();
+                Console.WriteLine("\n-3 Enter your postler number: ");
+                Input[2] = Console.ReadLine();
+                Console.WriteLine("\n-4 Enter your City: ");
+                Input[3] = Console.ReadLine();
+
+            return Input;
+        }
 
 
 
