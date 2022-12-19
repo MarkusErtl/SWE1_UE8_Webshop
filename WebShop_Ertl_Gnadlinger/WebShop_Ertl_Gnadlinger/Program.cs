@@ -34,23 +34,32 @@ namespace WebShop_Ertl_Gnadlinger
             //                # Abbrechen
             //-----------------------------------------------
 
+            //----------Notes:
+            // - EnterChangeUser funktion: aufteilen in 2 segmente, neue eingabe und ersetzen -> sonst bei fehler-Wiederholung werden bereits neue daten angezeigt
+
+
 
             Customer User = new Customer(null, null);    //enters a default customer
             string menuInput;
 
             Console.WriteLine("*************************\n*Welcome to the Webshop!*\n*************************");
-
             Console.WriteLine("\nWhat do you want to do?\n");
 
-            try
+            bool EndOfProgramm = false;
+            do
             {
-                menuInput = MenuInput();      //gets the Input from the user 1,2 or 3             
-                MenuNaviagtion(menuInput, User);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("\n" + ex.ToString() + "\n");
-            }
+                try
+                {
+                    menuInput = MenuInput();      //gets the Input from the user 1,2 or 3             
+                    MenuNaviagtion(menuInput, User);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("\n" + ex.ToString() + "\n");
+                }
+
+            } while (!EndOfProgramm);
+           
 
 
         }
@@ -61,12 +70,14 @@ namespace WebShop_Ertl_Gnadlinger
             string Input;
             do
             {
-                Console.WriteLine("\t1 - Enter/change your user data\n\t2 - Product overview\n\t3 - show shopping cart\n\n Please Enter a number:   ");
-                Input = Console.ReadLine();
-                success = Enum.IsDefined(typeof(Menu), Input);
+                Console.WriteLine("\n#The Menu:");
+                    Console.WriteLine("\t1 - Enter/change your user data\n\t2 - Product overview\n\t3 - show shopping cart\n\n Please Enter a number:   ");
+                    Input = Console.ReadLine();
+                    int numberInput = int.Parse(Input);
+                    success = Enum.IsDefined(typeof(Menu), numberInput);
 
-                if (!success) throw new ArgumentException("\nError, incorrect Input - Try again!\n");
-
+                    if (!success) throw new ArgumentException("\nError, incorrect Input - Try again!\n");
+                 
             } while (!success);
 
             return Input;
@@ -74,12 +85,13 @@ namespace WebShop_Ertl_Gnadlinger
 
         public static string MenuNaviagtion(string input, Customer user)
         {
-            int i = int.Parse(input);
+            int i = int.Parse(input);//delete
 
             switch (i)
             {
                 case 1:
                     EnterChangeUser(user);
+                    
 
                     break;
                 case 2:
@@ -101,7 +113,8 @@ namespace WebShop_Ertl_Gnadlinger
         static public void EnterChangeUser(Customer user)
         {
             string Input;
-            bool success = false;   
+            bool success = false;
+            Console.WriteLine("\nLet's enter/change your user data!\n");
 
             do
             {
@@ -123,14 +136,14 @@ namespace WebShop_Ertl_Gnadlinger
                     
                     if(user.Address == null)
                     {
-                        string[] addressArray = new string[3]; //initialises an array if none exists yet
+                        string[] addressArray = new string[4]; //initialises an array if none exists yet
                         addressArray = AddressInput();
                         
                         user.InputAddress(addressArray);   // input verification in the class, method "InputAddress"
                     }
                     else
                     {
-                        string[] NewaddressArray = new string[3];
+                        string[] NewaddressArray = new string[4];
 
                         Console.WriteLine("\nThe current address is: \n");
                         for (int i = 0; i < user.Address.Length; i++) 
@@ -154,24 +167,24 @@ namespace WebShop_Ertl_Gnadlinger
 
             Console.WriteLine("\nVery Good, you changed your data!\n");
 
-            MenuInput();
+           
         }
 
         public static string[] AddressInput()       //only for the Input of the address, input verification in the class
         {
-            string[] Input = new string[3];
+            string[] InputAddress = new string[4];
                         
-                Console.WriteLine("\nPlease Enter your new address in the following form:");
+                Console.WriteLine("\nPlease Enter your new address:");
                 Console.WriteLine("\n-1 Enter your street: ");
-                Input[0] = Console.ReadLine();
-                Console.WriteLine("\n-2 Enter your house number: ");
-                Input[1] = Console.ReadLine();
-                Console.WriteLine("\n-3 Enter your postler number: ");
-                Input[2] = Console.ReadLine();
-                Console.WriteLine("\n-4 Enter your City: ");
-                Input[3] = Console.ReadLine();
+                InputAddress[0] = Console.ReadLine();
+                Console.WriteLine("-2 Enter your house number: ");
+                InputAddress[1] = Console.ReadLine();
+                Console.WriteLine("-3 Enter your postler number: ");
+                InputAddress[2] = Console.ReadLine();
+                Console.WriteLine("-4 Enter your City: ");
+                InputAddress[3] = Console.ReadLine();
 
-            return Input;
+            return InputAddress;
         }
 
 
