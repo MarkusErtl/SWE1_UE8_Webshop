@@ -15,19 +15,19 @@ namespace WebShop_Ertl_Gnadlinger
 
         //----------properties----------
 
-        public Product Products
-        {
-            get { return products; }
-        }
+        //public Product Products
+        //{
+        //    get { return products; }
+        //}
 
 
 
         //-----------methods--------------
-        public string AddProduct(Product)
-        {
-            //Adds a new Product
+        //public string AddProduct(Product)
+        //{
+        //    //Adds a new Product
 
-        }
+        //}
 
 
         public void clear()

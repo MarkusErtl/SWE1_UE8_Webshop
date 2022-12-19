@@ -11,17 +11,18 @@ namespace WebShop_Ertl_Gnadlinger
 
         //----------member variables-----
         string _name;
-        string _address;
+        string[] _address;
 
 
-        //---------constructor---------
+        //---------default constructor---------
 
-        public Customer (string name, string address)
+        public Customer(string name, string[] address)
         {
-            name = _name;
-            address = _address;
-
+            name = null;
+            address = null;
         }
+
+
 
         //--------properties---------------
 
@@ -29,6 +30,33 @@ namespace WebShop_Ertl_Gnadlinger
 
         //---------methods------------
 
+        public void InputName(string nameInput)
+        {
+            bool success = false;
+
+            do
+            {
+                //abfrage Namen
+                //korrekte eingabe?
+                    //Nein exeption
+
+
+            } while (!success);
+
+            _name = nameInput;
+
+        }
+
+        public void InputAddress(string[] addressInput)
+        {
+            //gets Address from main like a = { Street, street number, postler number, city}
+           // array kommt als string
+           //komplette überprüfung, jedes Element
+
+
+
+            _address = addressInput;
+        }
 
 
 

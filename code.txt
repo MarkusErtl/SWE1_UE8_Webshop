@@ -1,0 +1,45 @@
+ Console.WriteLine("Hello, World!\n");
+
+            int menuInput = 0;
+
+            Console.WriteLine("*************************\n*Welcome to the Webshop!*\n*************************");
+
+            Console.WriteLine("\nWhat do you want to do?\n"
+            menuInput = MenuNavigation();
+
+
+            //-----Webshop-------
+
+            //--Main--
+
+
+
+
+
+            //--Classes---
+
+
+
+            //--Customer
+
+            //--shopping cart
+
+            //--Product
+
+            //--shop
+
+
+
+
+        }
+
+
+        public int MenuNavigation()
+        {
+            Console.WriteLine("\t1 - Enter/change your user data\n2 - Product overview\n 3 - show shopping cart\n\n Please Enter a number:   ");
+
+
+
+
+            return 0;
+        }
