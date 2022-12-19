@@ -1,5 +1,8 @@
-﻿namespace WebShop_Ertl_Gnadlinger
+﻿using System.IO.Pipes;
+
+namespace WebShop_Ertl_Gnadlinger
 {
+
     internal class Program
     {
         public enum Menu
@@ -10,7 +13,7 @@
         }
 
 
-
+        // public static Customer User1 = new Customer(null, null);
 
         static void Main(string[] args)
         {
@@ -31,7 +34,7 @@
             //-----------------------------------------------
 
 
-            Customer person = new Customer(null,null);      //enters a default customer
+            Customer User = new Customer(null, null);    //enters a default customer
             string menuInput;
 
             Console.WriteLine("*************************\n*Welcome to the Webshop!*\n*************************");
@@ -41,7 +44,7 @@
             try
             {
                 menuInput = MenuInput();      //gets the Input from the user 1,2 or 3             
-                MenuNaviagtion(menuInput);
+                MenuNaviagtion(menuInput, User);
             }
             catch (Exception ex)
             {
@@ -55,7 +58,8 @@
         {
             bool success = false;
             string Input;
-            do {
+            do
+            {
                 Console.WriteLine("\t1 - Enter/change your user data\n\t2 - Product overview\n\t3 - show shopping cart\n\n Please Enter a number:   ");
                 Input = Console.ReadLine();
                 success = Enum.IsDefined(typeof(Menu), Input);
@@ -67,14 +71,14 @@
             return Input;
         }
 
-        public static string MenuNaviagtion(string input)
+        public static string MenuNaviagtion(string input, Customer user)
         {
             int i = int.Parse(input);
 
             switch (i)
             {
                 case 1:
-                    EnterChangeUser();
+                    EnterChangeUser(user);
 
                     break;
                 case 2:
@@ -93,19 +97,37 @@
             return "0";
         }
 
-        static public void EnterChangeUser();
+        static public void EnterChangeUser(Customer user)
         {
-        if(Customer.Name == null)
+            string Input;
+            bool success = false;
+            do
             {
-            
+                try
+                {
+                    Console.WriteLine("Please Enter your Name:");
+                    Input = Console.ReadLine();
+                    user.InputName(Input);
 
-            }else{
+                    //address
 
 
 
-            }
 
-        
+
+                    success = true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("\n" + ex.ToString() + "\n");
+                }
+
+            } while (!success);
+
+           
+        }
+
+
 
 
 

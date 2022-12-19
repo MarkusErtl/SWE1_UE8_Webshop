@@ -26,6 +26,10 @@ namespace WebShop_Ertl_Gnadlinger
 
         //--------properties---------------
 
+        public string Name
+        {
+            get { return _name; }
+        }
 
 
         //---------methods------------
