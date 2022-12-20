@@ -28,7 +28,16 @@ namespace WebShop_Ertl_Gnadlinger
         //es wird die artikelnummer übergeben z.b. 003
         //es soll das dazugehörige objekte der klasse Product zurück gegeben werden
 
-        public
+        public void getProduct(int[] articleNumbers)
+        {
+            //2 for schleifen inereinander die äußere greift auf die items der ShopListe zu,
+            // die innere vergleicht die artikelnummern mit den eingegebenen artikelnummern und zieht bei treffer das jeweilige
+            // product in die classe Cart
+
+
+
+
+        }
 
 
 
