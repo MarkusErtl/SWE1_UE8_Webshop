@@ -37,8 +37,10 @@ namespace WebShop_Ertl_Gnadlinger
             //----------Notes:
             // - EnterChangeUser funktion: aufteilen in 2 segmente, neue eingabe und ersetzen -> sonst bei fehler-Wiederholung werden bereits neue daten angezeigt
 
+            //-Oskar:
+            //-funktion bauen:   InputArticleNumbersShop()
+            //-in klasse customer: beide eingangsüberprüfungen
 
-            
             Customer User = new Customer(null, null);    //creates a default customer
             Shop LegoShop = new Shop();                  //creates a shop
             LegoShop.refill();                           //refills the shop with predefined items

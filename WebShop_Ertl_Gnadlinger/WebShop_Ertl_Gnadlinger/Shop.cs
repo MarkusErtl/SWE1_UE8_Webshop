@@ -49,9 +49,7 @@ namespace WebShop_Ertl_Gnadlinger
 
         }
 
-        //methode :
-        //es wird die artikelnummer übergeben z.b. 003
-        //es soll das dazugehörige objekte der klasse Product zurück gegeben werden
+        
 
 
     }

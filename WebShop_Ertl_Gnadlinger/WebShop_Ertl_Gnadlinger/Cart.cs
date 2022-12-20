@@ -11,7 +11,7 @@ namespace WebShop_Ertl_Gnadlinger
         //----------member variables--------------
         List<Product> products;
 
-        
+
 
         //----------properties----------
 
@@ -24,7 +24,11 @@ namespace WebShop_Ertl_Gnadlinger
 
         //-----------methods--------------
 
-        public 
+        //methode :
+        //es wird die artikelnummer übergeben z.b. 003
+        //es soll das dazugehörige objekte der klasse Product zurück gegeben werden
+
+        public
 
 
 
