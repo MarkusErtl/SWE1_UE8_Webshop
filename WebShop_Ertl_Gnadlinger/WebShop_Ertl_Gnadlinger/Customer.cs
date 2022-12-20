@@ -18,8 +18,8 @@ namespace WebShop_Ertl_Gnadlinger
 
         public Customer(string name, string[] address)
         {
-            name = null;
-            address = null;
+            _name = null;
+            _address = null;
         }
 
 

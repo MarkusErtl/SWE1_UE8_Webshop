@@ -14,7 +14,7 @@ namespace WebShop_Ertl_Gnadlinger
         }
 
 
-        // public static Customer User1 = new Customer(null, null);
+       
 
         static void Main(string[] args)
         {
@@ -38,8 +38,12 @@ namespace WebShop_Ertl_Gnadlinger
             // - EnterChangeUser funktion: aufteilen in 2 segmente, neue eingabe und ersetzen -> sonst bei fehler-Wiederholung werden bereits neue daten angezeigt
 
 
+            
+            Customer User = new Customer(null, null);    //creates a default customer
+            Shop LegoShop = new Shop();                  //creates a shop
+            LegoShop.refill();                           //refills the shop with predefined items
+                                                    
 
-            Customer User = new Customer(null, null);    //enters a default customer
             string menuInput;
 
             Console.WriteLine("*************************\n*Welcome to the Webshop!*\n*************************");
@@ -51,7 +55,7 @@ namespace WebShop_Ertl_Gnadlinger
                 try
                 {
                     menuInput = MenuInput();      //gets the Input from the user 1,2 or 3             
-                    MenuNaviagtion(menuInput, User);
+                    MenuNaviagtion(menuInput, User, LegoShop);
                 }
                 catch (Exception ex)
                 {
@@ -83,7 +87,7 @@ namespace WebShop_Ertl_Gnadlinger
             return Input;
         }
 
-        public static string MenuNaviagtion(string input, Customer user)
+        public static string MenuNaviagtion(string input, Customer user, Shop LegoShop)
         {
             int i = int.Parse(input);//delete
 
@@ -95,6 +99,7 @@ namespace WebShop_Ertl_Gnadlinger
 
                     break;
                 case 2:
+                    ProductOverview(user, LegoShop);
 
                     break;
 
@@ -187,8 +192,60 @@ namespace WebShop_Ertl_Gnadlinger
             return InputAddress;
         }
 
+        public static void ProductOverview(Customer user, Shop LegoShop) //user Übergabe sinnvoll??
+        {
+            //produkte werden über klasse shop angelegt -> Oben im Main
+            //Aufruf Produkte über klasse shop.product
+
+            bool success = false;
+            do
+            {
+                Console.WriteLine("\nWelcome to the Product Overview!");
 
 
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("\tnumber\t\ttitle\t\ttype\t\tprice\t\tin stock");
+                Console.BackgroundColor = ConsoleColor.Black;
+
+                int NumberOfProducts = LegoShop.ShopList.Length;
+                for (int i = 0; i < LegoShop.ShopList.Length; i++)
+                {
+                    Console.WriteLine(LegoShop.ShopList[i]);
+                }
+
+                Console.WriteLine("When you have decided on a product, enter the number below\n");
+
+                int[] articleNumbers = InputArticleNumbersShop();
+
+
+
+
+
+            } while (!success);
+
+
+
+            //produkt wird ausgewählt -> klasse cart greift auf shop.product zu und übernimmt es 
+            // -> muss aber gleicheitig die Stückzahl veringern
+
+
+
+
+        }
+
+        private static int[] InputArticleNumbersShop()
+        {
+            string input = Console.ReadLine();
+
+            //hier sollen die eingaben vom user auf echtheit überprüft werden, also ob die artikel nummern existieren
+            //diese sollen in ein array gespeichert werden
+            //die eingabe erfolgt so lange bis der user ein key-buchstaben eingibt
+
+
+            int[] array = new int[] { 1, 2, 3 };
+
+           return array;
+        }
 
 
 

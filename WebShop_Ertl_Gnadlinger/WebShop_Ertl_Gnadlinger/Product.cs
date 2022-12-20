@@ -11,19 +11,23 @@ namespace WebShop_Ertl_Gnadlinger
         //---------membervariable---------
 
         private int _artikelNumber;
-        private double _price;
         private string _title;
+        private string _type;
+        private double _price;
+        private int _numberOfPieces;
 
 
+        // 001 Laptop Elektrogerät 299,99€ 20Stk.
 
         //---------constructor-----------
 
-        public Product (int artikelNumber, double price, string title)
+        public Product(int artikelNumber, string title, string type, double price, int numberOfPieces)
         {
-            artikelNumber = _artikelNumber;
-            price = _artikelNumber;
-            title = _title;
-
+            _artikelNumber = artikelNumber;
+            _title = title;
+            _type = type;
+            _price = price;
+            _numberOfPieces = numberOfPieces;
 
         }
 
@@ -33,18 +37,37 @@ namespace WebShop_Ertl_Gnadlinger
         public int ArtikleNumber
         {
             get { return _artikelNumber; }
-
         }
-
-        public double Price
-        {
-            get { return _price; }
-        }
-
         public string Title
         {
             get { return _title; }
         }
+        public string Type
+        {
+            get { return _type; }
+        }
+        public double Price
+        {
+            get { return _price; }
+
+        }
+        public int NumberOfPieces
+        {
+            get { return _numberOfPieces; }
+            set
+            {
+                _numberOfPieces--;
+            }
+        }
+        //----------methods------------
+
+        public override string ToString()
+        {
+            return "\t"+_artikelNumber +"\t\t"+_title+"\t\t"+_type+"\t\t"+_price+"\t\t"+_numberOfPieces;
+        }
+
+
+
 
     }
 }
