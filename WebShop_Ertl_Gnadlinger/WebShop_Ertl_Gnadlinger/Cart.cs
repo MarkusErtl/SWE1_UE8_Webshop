@@ -20,6 +20,9 @@ namespace WebShop_Ertl_Gnadlinger
         //    get { return products; }
         //}
 
+        //-----constructor---------
+        public Cart()
+        { }
 
 
         //-----------methods--------------
@@ -28,15 +31,37 @@ namespace WebShop_Ertl_Gnadlinger
         //es wird die artikelnummer übergeben z.b. 003
         //es soll das dazugehörige objekte der klasse Product zurück gegeben werden
 
-        public void getProduct(int[] articleNumbers)
+        public void getProduct( List<string> artikleNumbers, Shop LegoShop)
         {
+            Product[] ItemList = LegoShop.ShopList;
+            int counter = ItemList.Length;
+
+            for (int i = 0; i < counter; i++)
+            {
+                Product CurrentItem = ItemList[i];
+                int ShopArticleNumber = CurrentItem.ArtikleNumber;
+
+                foreach (var item in artikleNumbers)
+                {
+                  //  if ( item == ShopArticleNumber) //datentypen nicht gleich
+
+
+                }
+
+                
+                
+            }
+            
+
+
+
             //2 for schleifen inereinander die äußere greift auf die items der ShopListe zu,
             // die innere vergleicht die artikelnummern mit den eingegebenen artikelnummern und zieht bei treffer das jeweilige
             // product in die classe Cart
 
 
 
-
+            
         }
 
 

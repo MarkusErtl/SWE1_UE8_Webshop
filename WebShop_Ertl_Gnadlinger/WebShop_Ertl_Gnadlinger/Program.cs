@@ -44,7 +44,7 @@ namespace WebShop_Ertl_Gnadlinger
             Customer User = new Customer(null, null);    //creates a default customer
             Shop LegoShop = new Shop();                  //creates a shop
             LegoShop.refill();                           //refills the shop with predefined items
-                                                    
+            Cart LegoCart = new Cart();                  //creates a Shopping-Cart                    
 
             string menuInput;
 
@@ -57,7 +57,7 @@ namespace WebShop_Ertl_Gnadlinger
                 try
                 {
                     menuInput = MenuInput();      //gets the Input from the user 1,2 or 3             
-                    MenuNaviagtion(menuInput, User, LegoShop);
+                    MenuNaviagtion(menuInput, User, LegoShop, LegoCart);
                 }
                 catch (Exception ex)
                 {
@@ -89,7 +89,7 @@ namespace WebShop_Ertl_Gnadlinger
             return Input;
         }
 
-        public static string MenuNaviagtion(string input, Customer user, Shop LegoShop)
+        public static string MenuNaviagtion(string input, Customer user, Shop LegoShop, Cart LegoCart)
         {
             int i = int.Parse(input);//delete
 
@@ -101,7 +101,7 @@ namespace WebShop_Ertl_Gnadlinger
 
                     break;
                 case 2:
-                    ProductOverview(user, LegoShop);
+                    ProductOverview(user, LegoShop,LegoCart);
 
                     break;
 
@@ -194,7 +194,7 @@ namespace WebShop_Ertl_Gnadlinger
             return InputAddress;
         }
 
-        public static void ProductOverview(Customer user, Shop LegoShop) //user Übergabe sinnvoll??
+        public static void ProductOverview(Customer user, Shop LegoShop,Cart LegoCart) //user Übergabe sinnvoll??
         {
             //produkte werden über klasse shop angelegt -> Oben im Main
             //Aufruf Produkte über klasse shop.product
@@ -217,8 +217,9 @@ namespace WebShop_Ertl_Gnadlinger
 
                 Console.WriteLine("When you have decided on a product, enter the number below\n");
 
-                int[] articleNumbers = InputArticleNumbersShop();
+                List<string>artikleNumbers = InputArticleNumbersShop();
 
+                LegoCart.getProduct(artikleNumbers,LegoShop);
 
 
 
@@ -235,8 +236,10 @@ namespace WebShop_Ertl_Gnadlinger
 
         }
 
-        private static int[] InputArticleNumbersShop()
+        private static List<string> InputArticleNumbersShop()
         {
+            List<string> Input = new List<string>();
+
             string input = Console.ReadLine();
 
             //hier sollen die eingaben vom user auf echtheit überprüft werden, also ob die artikel nummern existieren
@@ -244,9 +247,10 @@ namespace WebShop_Ertl_Gnadlinger
             //die eingabe erfolgt so lange bis der user ein key-buchstaben eingibt
 
 
-            int[] array = new int[] { 1, 2, 3 };
+            Input[0] = "101";
+            Input[1] = "103";
 
-           return array;
+           return Input;
         }
 
 
