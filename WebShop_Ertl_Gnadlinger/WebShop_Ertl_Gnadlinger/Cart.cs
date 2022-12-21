@@ -55,7 +55,7 @@ namespace WebShop_Ertl_Gnadlinger
                         {
                             _cartList.Add(CurrentItem);              //List with all item but unsorted
                         }
-
+                        //blablabla
                     }                
 
                 }
