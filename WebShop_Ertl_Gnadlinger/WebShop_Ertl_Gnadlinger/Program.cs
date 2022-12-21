@@ -217,7 +217,7 @@ namespace WebShop_Ertl_Gnadlinger
 
                 Console.WriteLine("When you have decided on a product, enter the number below\n");
 
-                List<string>artikleNumbers = InputArticleNumbersShop();
+                List<int>artikleNumbers = InputArticleNumbersShop();
 
                 LegoCart.getProduct(artikleNumbers,LegoShop);
 
@@ -236,9 +236,9 @@ namespace WebShop_Ertl_Gnadlinger
 
         }
 
-        private static List<string> InputArticleNumbersShop()
+        private static List<int> InputArticleNumbersShop()
         {
-            List<string> Input = new List<string>();
+            List<int> Input = new List<int>();
 
             string input = Console.ReadLine();
 
@@ -247,8 +247,8 @@ namespace WebShop_Ertl_Gnadlinger
             //die eingabe erfolgt so lange bis der user ein key-buchstaben eingibt
 
 
-            Input[0] = "101";
-            Input[1] = "103";
+            Input[0] = 101;
+            Input[1] = 103;
 
            return Input;
         }
