@@ -58,11 +58,40 @@ namespace WebShop_Ertl_Gnadlinger
 
         public void InputAddress(string[] addressInput)
         {
-            //gets Address from main like a = { Street, house number, postler number, city}
-           // array kommt als string
-           //komplette überprüfung, jedes Element
-           //grtfjzrd- zacher Hund
+            //gets Address from main like a = { Street, house number, post code, city}
+            // array kommt als string
+            //komplette überprüfung, jedes Element
+            
 
+
+            if (addressInput[0].All(char.IsLetter))
+            { }
+            else
+            {
+                throw new ArgumentException("Your street should only incloude letters");
+            }
+           
+
+            if (addressInput[1].All(char.IsLetterOrDigit))
+            { }
+            else
+            {
+                throw new ArgumentException("Your house number should only incloude numbers or letters");
+            }
+
+            if (addressInput[2].All(char.IsNumber))
+            { }
+            else
+            {
+                throw new ArgumentException("Your street should only incloude numbers");
+            }
+
+            if (addressInput[3].All(char.IsLetter))
+            { }
+            else
+            {
+                throw new ArgumentException("Your street should only incloude letters");
+            }
 
             _address = addressInput;
         }
