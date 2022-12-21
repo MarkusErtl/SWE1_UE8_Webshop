@@ -61,7 +61,7 @@ namespace WebShop_Ertl_Gnadlinger
             //gets Address from main like a = { Street, house number, postler number, city}
            // array kommt als string
            //komplette überprüfung, jedes Element
-           //grtfjzrdzmuzdrkd6d,
+           //grtfjzrd- zacher Hund
 
 
             _address = addressInput;

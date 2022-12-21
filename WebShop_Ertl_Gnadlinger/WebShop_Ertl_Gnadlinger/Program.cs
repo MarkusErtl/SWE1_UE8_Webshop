@@ -198,6 +198,7 @@ namespace WebShop_Ertl_Gnadlinger
         {
             //produkte werden über klasse shop angelegt -> Oben im Main
             //Aufruf Produkte über klasse shop.product
+             
 
             bool success = false;
             do
@@ -209,26 +210,31 @@ namespace WebShop_Ertl_Gnadlinger
                 Console.WriteLine("\tnumber\t\ttitle\t\ttype\t\tprice\t\tin stock");
                 Console.BackgroundColor = ConsoleColor.Black;
 
-                int NumberOfProducts = LegoShop.ShopList.Length;
-                for (int i = 0; i < LegoShop.ShopList.Length; i++)
+                try
                 {
-                    Console.WriteLine(LegoShop.ShopList[i]);
+                    int NumberOfProducts = LegoShop.ShopList.Length;
+                    for (int i = 0; i < LegoShop.ShopList.Length; i++)
+                    {
+                        Console.WriteLine(LegoShop.ShopList[i]);
+                    }
+
+                    Console.WriteLine("When you have decided on a product, enter the number below\n");
+
+                    List<int> artikleNumbers = InputArticleNumbersShop();
+
+                    LegoCart.getProduct(artikleNumbers, LegoShop);
                 }
-
-                Console.WriteLine("When you have decided on a product, enter the number below\n");
-
-                List<int>artikleNumbers = InputArticleNumbersShop();
-
-                LegoCart.getProduct(artikleNumbers,LegoShop);
-
-
-
+                catch (Exception ex)
+                {
+                    Console.Write(ex.ToString());
+                }
+                
 
             } while (!success);
 
 
 
-            //produkt wird ausgewählt -> klasse cart greift auf shop.product zu und übernimmt es 
+            
             // -> muss aber gleicheitig die Stückzahl veringern
 
 
