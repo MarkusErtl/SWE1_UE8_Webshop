@@ -204,7 +204,7 @@ namespace WebShop_Ertl_Gnadlinger
             bool success = false;
             do
             {
-                Console.WriteLine("\nWelcome to the Product Overview!");
+                Console.WriteLine("\nWelcome to the Product Overview!\n");
 
 
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
@@ -219,8 +219,8 @@ namespace WebShop_Ertl_Gnadlinger
                         Console.WriteLine(LegoShop.ShopList[i]);
                     }
 
-                    Console.WriteLine("When you have decided on a product, enter the number below\n");
-                    Console.WriteLine("\nEnter 0, if you have finished.");
+                    Console.WriteLine("\nWhen you have decided on a product, enter the number below");
+                    Console.WriteLine("Enter 0, if you have finished.");
                     List<int> artikleNumbers = InputArticleNumbersShop();
 
                     LegoCart.getProduct(artikleNumbers, LegoShop); // method in Cart that compares the article number from the user with the shopList
@@ -228,10 +228,12 @@ namespace WebShop_Ertl_Gnadlinger
 
 
                     Console.WriteLine("Your selected Items now in the Shopping Cart, select 2 in the Menu to display them.");
+                    success = true;
                 }
                 catch (Exception ex)
                 {
                     Console.Write(ex.ToString());
+                    success = false;
                 }
                 
 
@@ -245,7 +247,7 @@ namespace WebShop_Ertl_Gnadlinger
             List<int> articleListInput = new List<int>();
 
             bool check = false;
-
+            
             do
             {
                 string currentInput = Console.ReadLine();
