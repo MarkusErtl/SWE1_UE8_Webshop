@@ -36,6 +36,7 @@ namespace WebShop_Ertl_Gnadlinger
 
             //----------Notes:
             // - EnterChangeUser funktion: aufteilen in 2 segmente, neue eingabe und ersetzen -> sonst bei fehler-Wiederholung werden bereits neue daten angezeigt
+            // - nach der abgeschlossenen bestellung muss die Stückzahl veringert werden
 
             //-Oskar:
             //-funktion bauen:   InputArticleNumbersShop()
@@ -219,10 +220,14 @@ namespace WebShop_Ertl_Gnadlinger
                     }
 
                     Console.WriteLine("When you have decided on a product, enter the number below\n");
-
+                    Console.WriteLine("\nEnter 0, if you have finished.");
                     List<int> artikleNumbers = InputArticleNumbersShop();
 
-                    LegoCart.getProduct(artikleNumbers, LegoShop);
+                    LegoCart.getProduct(artikleNumbers, LegoShop); // method in Cart that compares the article number from the user with the shopList
+
+
+
+                    Console.WriteLine("Your selected Items now in the Shopping Cart, select 2 in the Menu to display them.");
                 }
                 catch (Exception ex)
                 {
@@ -233,30 +238,44 @@ namespace WebShop_Ertl_Gnadlinger
             } while (!success);
 
 
-
-            
-            // -> muss aber gleicheitig die Stückzahl veringern
-
-
-
-
         }
 
         private static List<int> InputArticleNumbersShop()
         {
-            List<int> Input = new List<int>();
+            List<int> articleListInput = new List<int>();
 
-            string input = Console.ReadLine();
+            bool check = false;
 
-            //hier sollen die eingaben vom user auf echtheit überprüft werden, also ob die artikel nummern existieren
-            //diese sollen in ein array gespeichert werden
-            //die eingabe erfolgt so lange bis der user ein key-buchstaben eingibt
+            do
+            {
+                string currentInput = Console.ReadLine();
+                int Intput = int.Parse(currentInput);
+
+                //hier sollen die eingaben vom user auf echtheit überprüft werden, also ob die artikel nummern existieren
+                //diese sollen in ein array gespeichert werden
+                //die eingabe erfolgt so lange bis der user ein key-buchstaben eingibt
+                if (Intput == 0)
+                {
+                    check = true;
+                    break;
+                }
+                else
+                {
+                    articleListInput.Add(Intput);
+                    
+                }
+               
 
 
-            Input[0] = 101;
-            Input[1] = 103;
+               
 
-           return Input;
+
+            } while (!check);
+
+            
+
+          
+           return articleListInput;
         }
 
 

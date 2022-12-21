@@ -10,16 +10,16 @@ namespace WebShop_Ertl_Gnadlinger
     internal class Cart
     {
         //----------member variables--------------
-        List<Product> CartList = new List<Product>();
+        List<Product> _cartList = new List<Product>();
 
 
 
         //----------properties----------
 
-        //public Product Products
-        //{
-        //    get { return products; }
-        //}
+        public List<Product> CartList           //propertie to get the User Input of items he/she/it wants
+        {
+            get { return _cartList; }
+        }
 
         //-----constructor---------
         public Cart()
@@ -53,7 +53,7 @@ namespace WebShop_Ertl_Gnadlinger
                     {
                         if (item == ItemList[j].ArtikleNumber)           //query if input User is equal to an article number of the current item
                         {
-                            CartList.Add(CurrentItem);
+                            _cartList.Add(CurrentItem);              //List with all item but unsorted
                         }
 
                     }                

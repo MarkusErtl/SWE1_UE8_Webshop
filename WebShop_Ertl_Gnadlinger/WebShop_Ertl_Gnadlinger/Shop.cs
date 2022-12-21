@@ -10,7 +10,7 @@ namespace WebShop_Ertl_Gnadlinger
     {
         //---- member variables-----------
 
-        private Product[] _shopList = new Product[9];
+        private Product[] _shopList = new Product[3];
 
         //---- properties-----
 
