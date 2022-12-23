@@ -39,8 +39,8 @@ namespace WebShop_Ertl_Gnadlinger
             // - nach der abgeschlossenen bestellung muss die Stückzahl veringert werden
 
             //-Oskar:
-            //-funktion bauen:   InputArticleNumbersShop()
             //-in klasse customer: beide eingangsüberprüfungen
+
 
             Customer User = new Customer(null, null);    //creates a default customer
             Shop LegoShop = new Shop();                  //creates a shop
@@ -219,11 +219,11 @@ namespace WebShop_Ertl_Gnadlinger
                         Console.WriteLine(LegoShop.ShopList[i]);
                     }
 
-                    Console.WriteLine("\nWhen you have decided on a product, enter the number below");
+                    Console.WriteLine("\nWhen you have decided on a product, enter the number and the number of pieces, of the respective product.");
                     Console.WriteLine("Enter 0, if you have finished.");
-                    List<int> artikleNumbers = InputArticleNumbersShop();
+                    List<Tuple<int,int>> artikleNumbersAndPieces = InputArticleNumbersShop(LegoShop);
 
-                    LegoCart.getProduct(artikleNumbers, LegoShop); // method in Cart that compares the article number from the user with the shopList
+                    LegoCart.getProduct(artikleNumbersAndPieces, LegoShop); // method in Cart that compares the article number from the user with the shopList
 
 
 
@@ -242,34 +242,98 @@ namespace WebShop_Ertl_Gnadlinger
 
         }
 
-        private static List<int> InputArticleNumbersShop()
+
+
+
+
+        private static List<Tuple<int,int>> InputArticleNumbersShop(Shop LegoShop)
         {
-            List<int> articleListInput = new List<int>();
+            List<Tuple<int,int>> articleAndPiecesListInput = new List<Tuple<int,int>>();
 
             bool check = false;
-            
+
+
+            Product[] RealItemList = LegoShop.ShopList;
+            Tuple<int,int>[] realArticleNumbers = new Tuple<int, int>[LegoShop.ShopList.Length];
+
+            for (int i = 0; i < LegoShop.ShopList.Length; i++)
+            {  
+                realArticleNumbers[i] = new Tuple<int, int>(RealItemList[0].ArtikleNumber, RealItemList[0].NumberOfPieces);    //gets a list of all articleNumbers and Number of Pieces that are in the Shop
+            }
+
+
+
+
             do
             {
-                string currentInput = Console.ReadLine();
-                int Intput = int.Parse(currentInput);
+                
+                bool Numbercheck = false;
+                bool piecesCheck = false;
+                int InputNumberInt = 0;
+                int InputPiecesInt = 0;
 
-                //hier sollen die eingaben vom user auf echtheit überprüft werden, also ob die artikel nummern existieren
-                //diese sollen in ein array gespeichert werden
-                //die eingabe erfolgt so lange bis der user ein key-buchstaben eingibt
-                if (Intput == 0)
+                do
+                {                           //query for the article Number Input
+                    InputNumberInt = 0;
+                    Console.WriteLine("Enter Number:");
+                    string InputNumber = Console.ReadLine();
+                    Numbercheck = int.TryParse(InputNumber, out InputNumberInt);                
+                    if(InputNumberInt == 0) { break; }      //leaves the do while if the input was 0
+
+
+
+                    foreach (var item in realArticleNumbers )
+                    {
+                        if(item.Item1 == InputNumberInt)
+                        {
+                            Numbercheck = true;
+                            break;
+                        }
+                    }
+                    if (!Numbercheck)
+                    {
+                        Console.WriteLine("Error, please Enter a real article number.");
+                    }
+
+                } while (!Numbercheck);
+
+                do
                 {
-                    check = true;
+                    if (InputNumberInt == 0) { break; }         //leaves the do while if the input was 0
+
+
+                    InputPiecesInt = 0;
+                    Console.WriteLine("Enter Number of Pieces:");
+                    string InputPieces = Console.ReadLine();
+                    piecesCheck = int.TryParse(InputPieces, out InputPiecesInt);
+                    if (InputPiecesInt == 0) { break; }         //leaves the do while if the input was 0
+
+                    foreach (var item in realArticleNumbers)
+                    {
+                        if(item.Item2 <= InputPiecesInt && InputPiecesInt>0)
+                        {
+                            piecesCheck = true;
+                            break;
+                        }                        
+                    }
+                    if(!piecesCheck)
+                    {
+                        Console.WriteLine("Please enter a possible number of pieces");
+                    }
+
+
+                } while (!piecesCheck);
+
+                if (InputNumberInt == 0 || InputPiecesInt == 0) 
+                {
+                    check = false;
                     break;
                 }
                 else
                 {
-                    articleListInput.Add(Intput);
-                    
-                }
-               
-
-
-               
+                    articleAndPiecesListInput.Add(new Tuple<int, int>(InputNumberInt,InputPiecesInt));
+                }            
+                
 
 
             } while (!check);
@@ -277,7 +341,7 @@ namespace WebShop_Ertl_Gnadlinger
             
 
           
-           return articleListInput;
+           return articleAndPiecesListInput;
         }
 
 

@@ -36,8 +36,11 @@ namespace WebShop_Ertl_Gnadlinger
         // product in die classe Cart
 
 
-        public void getProduct( List<int> artikleNumbers, Shop LegoShop)
+        public void getProduct(List<Tuple<int, int>> artikleNumbers, Shop LegoShop)
         {
+            //überarbeitung - List besteht jetzt aus einem Tupel (artikelnummer und Stückzahl)
+
+
             Product[] ItemList = LegoShop.ShopList;         //shoplist with all items
             int counter = ItemList.Length;                  //counter for number of items
 
