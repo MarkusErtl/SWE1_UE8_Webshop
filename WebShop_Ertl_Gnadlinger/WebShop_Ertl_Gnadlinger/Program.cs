@@ -35,8 +35,12 @@ namespace WebShop_Ertl_Gnadlinger
             //-----------------------------------------------
 
             //----------Notes:
+            // - Fehler : Bei Funktion InputArticleNumbersShop -> echte Artikelnummern werden falsch übergebn (für die überprüfung)
+
             // - EnterChangeUser funktion: aufteilen in 2 segmente, neue eingabe und ersetzen -> sonst bei fehler-Wiederholung werden bereits neue daten angezeigt
             // - nach der abgeschlossenen bestellung muss die Stückzahl veringert werden
+
+
 
             //-Oskar:
             //-in klasse customer: beide eingangsüberprüfungen

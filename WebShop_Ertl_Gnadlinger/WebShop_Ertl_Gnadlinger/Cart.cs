@@ -10,13 +10,11 @@ namespace WebShop_Ertl_Gnadlinger
     internal class Cart
     {
         //----------member variables--------------
-        List<Product> _cartList = new List<Product>();
-
-
+        List<Tuple<Product,int>> _cartList = new List<Tuple<Product,int>>();
 
         //----------properties----------
 
-        public List<Product> CartList           //propertie to get the User Input of items he/she/it wants
+        public List<Tuple<Product,int>> CartList           //propertie to get the User Input of items he/she/it wants
         {
             get { return _cartList; }
         }
@@ -49,20 +47,20 @@ namespace WebShop_Ertl_Gnadlinger
                 Product CurrentItem = ItemList[i];                   //picks one item out of the ShopList
                 int ShopArticleNumber = CurrentItem.ArtikleNumber;   //picks the article-number out of the current item
 
-                foreach (var item in artikleNumbers)
+                foreach (var item in artikleNumbers) //articlenumbers like {101,1 ; 102;4 ; 103;2 }
                 {
 
-                    for (int j = 0; j <counter ; j++)
+                    //for (int j = 0; j <counter ; j++)
+                    //{
+                    if (item.Item1 == ItemList[i].ArtikleNumber)           //query if input User is equal to an article number of the current item
                     {
-                        if (item == ItemList[j].ArtikleNumber)           //query if input User is equal to an article number of the current item
-                        {
-                            _cartList.Add(CurrentItem);              //List with all item but unsorted
-                        }
-                        //blablabla
-                    }                
+                        _cartList.Add(new Tuple<Product, int>(CurrentItem, item.Item2));              //List with all item but unsorted
+                    }
+                    //blablabla
+                    //}                
 
                 }
-                
+
             }
             
 
