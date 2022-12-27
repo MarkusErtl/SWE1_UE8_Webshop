@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.IO.Pipes;
 
 namespace WebShop_Ertl_Gnadlinger
@@ -111,7 +112,7 @@ namespace WebShop_Ertl_Gnadlinger
                     break;
 
                 case 3:
-
+                    ShoppingCart(LegoCart);
                     break;
 
                 default:
@@ -126,6 +127,7 @@ namespace WebShop_Ertl_Gnadlinger
         {
             string Input;
             bool success = false;
+            Console.Clear();
             Console.WriteLine("\nLet's enter/change your user data!\n");
 
             do
@@ -231,7 +233,7 @@ namespace WebShop_Ertl_Gnadlinger
 
 
 
-                    Console.WriteLine("Your selected Items now in the Shopping Cart, select 2 in the Menu to display them.");
+                    Console.WriteLine("\nYour selected Items now in the Shopping Cart, select 3 in the Menu to display them.");
                     success = true;
                 }
                 catch (Exception ex)
@@ -347,6 +349,59 @@ namespace WebShop_Ertl_Gnadlinger
           
            return articleAndPiecesListInput;
         }
+
+
+        private static void ShoppingCart(Cart LegoCart)
+        {
+            
+
+            if (LegoCart.CartList.Count == 0)
+            {
+                Console.WriteLine("Please select products first!");
+
+            }
+            else
+            {
+                Console.Clear();
+
+                Console.WriteLine("Welcome to your Cart!\n");
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("\tnumber\t\ttitle\t\ttype\t\tprice\t\tin stock\tselected");
+                Console.BackgroundColor = ConsoleColor.Black;
+
+                double totalPrice = 0;
+                double shipping = 0.00;
+
+                for (int i = 0; i < LegoCart.CartList.Count; i++)
+                {
+                    Console.WriteLine(LegoCart.CartList[i].Item1 + "\t\t" + LegoCart.CartList[i].Item2);
+
+                    double currentItemPrice = LegoCart.CartList[i].Item1.Price;
+                    int currentSelectedNumber = LegoCart.CartList[i].Item2;
+
+                    totalPrice = totalPrice + (currentItemPrice * currentSelectedNumber);
+                }
+
+                if (totalPrice <= 50.0)
+                {
+                    shipping = 10.00;
+                }
+
+                Console.WriteLine($"\n\t\t\t\t\tShipping costs:\t{shipping}\tEuro ");
+                totalPrice += shipping;
+                Console.WriteLine($"\t\t\t\t\ttotal costs:\t{totalPrice}\tEuro");
+
+
+
+
+
+
+
+
+
+            }
+        }
+
 
 
 
