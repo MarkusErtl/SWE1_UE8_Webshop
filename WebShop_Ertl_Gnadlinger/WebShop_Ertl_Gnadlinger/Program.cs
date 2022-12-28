@@ -14,6 +14,12 @@ namespace WebShop_Ertl_Gnadlinger
             Cart
         }
 
+        public enum EnumCart
+        {
+            order = 1,
+            backToproducts,
+            delete,
+        }
 
        
 
@@ -37,8 +43,9 @@ namespace WebShop_Ertl_Gnadlinger
 
             //----------Notes:
             // - Fehler : Bei Funktion InputArticleNumbersShop -> echte Artikelnummern werden falsch übergebn (für die überprüfung)
-
             // - EnterChangeUser funktion: aufteilen in 2 segmente, neue eingabe und ersetzen -> sonst bei fehler-Wiederholung werden bereits neue daten angezeigt
+
+            // - Warenkorb wird ausgegeben -> do-while die abfragt ob der benutzer bestellen oder abbrechen möchte
             // - nach der abgeschlossenen bestellung muss die Stückzahl veringert werden
 
 
@@ -52,7 +59,7 @@ namespace WebShop_Ertl_Gnadlinger
             LegoShop.refill();                           //refills the shop with predefined items
             Cart LegoCart = new Cart();                  //creates a Shopping-Cart                    
 
-            string menuInput;
+            string menuInput = null;
 
             Console.WriteLine("*************************\n*Welcome to the Webshop!*\n*************************");
             Console.WriteLine("\nWhat do you want to do?\n");
@@ -63,12 +70,14 @@ namespace WebShop_Ertl_Gnadlinger
                 try
                 {
                     menuInput = MenuInput();      //gets the Input from the user 1,2 or 3             
-                    MenuNaviagtion(menuInput, User, LegoShop, LegoCart);
+                   
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("\n" + ex.ToString() + "\n");
                 }
+
+                MenuNaviagtion(menuInput, User, LegoShop, LegoCart);
 
             } while (!EndOfProgramm);
            
@@ -389,7 +398,56 @@ namespace WebShop_Ertl_Gnadlinger
 
                 Console.WriteLine($"\n\t\t\t\t\tShipping costs:\t{shipping}\tEuro ");
                 totalPrice += shipping;
-                Console.WriteLine($"\t\t\t\t\ttotal costs:\t{totalPrice}\tEuro");
+                Console.WriteLine($"\t\t\t\t\ttotal costs:\t{Math.Round(totalPrice,2)}\tEuro");
+
+
+
+                bool success = false;
+                int IntInput=0;
+                do
+                {
+                    try
+                    {
+                        Console.WriteLine("\t1 - Order\n\t2 - save for later and back to the menu\n\t3 - cancel and delete the shopping cart\n\n Please Enter a number:   ");
+                        IntInput = int.Parse(Console.ReadLine());
+                        success = Enum.IsDefined(typeof(EnumCart), IntInput);
+
+                        if (!success) throw new ArgumentException("\nError, incorrect Input - Try again!\n");
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("\n"+ ex.ToString + "\n");
+                        
+                    }
+                    
+
+                } while (!success);
+
+                switch (IntInput)
+                {
+                    case 1:
+                        Console.WriteLine("\nThank you for your order!\nSee you soon :D");
+
+
+                        //stückzahlen verringern
+                        break;
+
+                    case 2:
+                        Console.Clear();
+
+                        break;
+                        //fertig
+                    case 3:
+
+                        //bestllung löschen und zurück zum menu
+                        break;
+
+                    default:
+                        break;
+
+                }
 
 
 
