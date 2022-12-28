@@ -11,7 +11,8 @@ namespace WebShop_Ertl_Gnadlinger
         {
             UserData = 1,
             Products,
-            Cart
+            Cart,
+            EndOfProgramm,
         }
 
         public enum EnumCart
@@ -45,8 +46,8 @@ namespace WebShop_Ertl_Gnadlinger
             // - Fehler : Bei Funktion InputArticleNumbersShop -> echte Artikelnummern werden falsch übergebn (für die überprüfung)
             // - EnterChangeUser funktion: aufteilen in 2 segmente, neue eingabe und ersetzen -> sonst bei fehler-Wiederholung werden bereits neue daten angezeigt
 
-            // - Warenkorb wird ausgegeben -> do-while die abfragt ob der benutzer bestellen oder abbrechen möchte
-            // - nach der abgeschlossenen bestellung muss die Stückzahl veringert werden
+           
+           
 
 
 
@@ -77,11 +78,11 @@ namespace WebShop_Ertl_Gnadlinger
                     Console.WriteLine("\n" + ex.ToString() + "\n");
                 }
 
-                MenuNaviagtion(menuInput, User, LegoShop, LegoCart);
+                EndOfProgramm = MenuNaviagtion(menuInput, User, LegoShop, LegoCart);
 
             } while (!EndOfProgramm);
-           
 
+            Console.ReadKey();
 
         }
 
@@ -92,7 +93,7 @@ namespace WebShop_Ertl_Gnadlinger
             do
             {
                 Console.WriteLine("\n#The Menu:");
-                    Console.WriteLine("\t1 - Enter/change your user data\n\t2 - Product overview\n\t3 - show shopping cart\n\n Please Enter a number:   ");
+                    Console.WriteLine("\t1 - Enter/change your user data\n\t2 - Product overview\n\t3 - show shopping cart\n\t4 - Exit webshop\n\n Please Enter a number:   ");
                     Input = Console.ReadLine();
                     int numberInput = int.Parse(Input);
                     success = Enum.IsDefined(typeof(Menu), numberInput);
@@ -104,10 +105,10 @@ namespace WebShop_Ertl_Gnadlinger
             return Input;
         }
 
-        public static string MenuNaviagtion(string input, Customer user, Shop LegoShop, Cart LegoCart)
+        public static bool MenuNaviagtion(string input, Customer user, Shop LegoShop, Cart LegoCart)
         {
             int i = int.Parse(input);//delete
-
+            bool EndOfProgramm = false;
             switch (i)
             {
                 case 1:
@@ -121,7 +122,12 @@ namespace WebShop_Ertl_Gnadlinger
                     break;
 
                 case 3:
-                    ShoppingCart(LegoCart);
+                    EndOfProgramm = ShoppingCart(LegoCart, LegoShop);
+                    break;
+
+                case 4:
+                    EndOfProgramm = true;
+                    Console.WriteLine("\n See you soon\n");
                     break;
 
                 default:
@@ -129,7 +135,7 @@ namespace WebShop_Ertl_Gnadlinger
 
             }
 
-            return "0";
+            return EndOfProgramm;
         }
 
         static public void EnterChangeUser(Customer user)
@@ -360,9 +366,9 @@ namespace WebShop_Ertl_Gnadlinger
         }
 
 
-        private static void ShoppingCart(Cart LegoCart)
+        private static bool ShoppingCart(Cart LegoCart,Shop LegoShop)
         {
-            
+            bool EndOfProgramm = false;
 
             if (LegoCart.CartList.Count == 0)
             {
@@ -429,9 +435,29 @@ namespace WebShop_Ertl_Gnadlinger
                 {
                     case 1:
                         Console.WriteLine("\nThank you for your order!\nSee you soon :D");
+                        
+                        //reduction numbers of pieces
+                        List<Tuple<Product, int>> CartList = LegoCart.CartList;
+                        Product[] itemList = LegoShop.ShopList;
 
+                        for (int i = 0; i <itemList.Length; i++)
+                        {
+                            Product product = itemList[i];
 
-                        //stückzahlen verringern
+                            foreach (var item in CartList)
+                            {
+                                if(item.Item1 == product)
+                                {
+                                    int newNumberofPieces = itemList[i].NumberOfPieces - item.Item2; //the number is reduced by the number of pieces selected by the customer
+
+                                    itemList[i].NumberOfPieces = newNumberofPieces;
+
+                                }
+                            }
+                        }
+                        LegoShop.ShopList = itemList;
+
+                        EndOfProgramm = true;
                         break;
 
                     case 2:
@@ -440,8 +466,11 @@ namespace WebShop_Ertl_Gnadlinger
                         break;
                         //fertig
                     case 3:
+                        Console.WriteLine("You successfully cancelled your order");
 
-                        //bestllung löschen und zurück zum menu
+                        LegoCart.CartList.Clear();
+                        LegoCart.CartList = new List<Tuple<Product, int>>();
+
                         break;
 
                     default:
@@ -449,15 +478,11 @@ namespace WebShop_Ertl_Gnadlinger
 
                 }
 
-
-
-
-
-
-
-
-
             }
+
+            return EndOfProgramm;
+
+
         }
 
 

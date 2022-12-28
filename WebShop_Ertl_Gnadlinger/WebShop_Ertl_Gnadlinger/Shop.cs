@@ -17,6 +17,8 @@ namespace WebShop_Ertl_Gnadlinger
         public Product[] ShopList
         { 
             get { return _shopList; } 
+
+            set { _shopList = value; }
         }
 
         //----- constructor-----

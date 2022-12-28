@@ -17,6 +17,7 @@ namespace WebShop_Ertl_Gnadlinger
         public List<Tuple<Product,int>> CartList           //propertie to get the User Input of items he/she/it wants
         {
             get { return _cartList; }
+            set { _cartList = value; }
         }
 
         //-----constructor---------

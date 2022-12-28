@@ -54,9 +54,10 @@ namespace WebShop_Ertl_Gnadlinger
         public int NumberOfPieces
         {
             get { return _numberOfPieces; }
+
             set
             {
-                _numberOfPieces--;
+                _numberOfPieces = value;
             }
         }
         //----------methods------------
