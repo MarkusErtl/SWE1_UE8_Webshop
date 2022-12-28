@@ -267,7 +267,7 @@ namespace WebShop_Ertl_Gnadlinger
 
         }
 
-
+        //kontrolle mit dem Warenkorb!!!!!!
         private static List<Tuple<int,int>> InputArticleNumbersShop(Shop LegoShop)
         {
             List<Tuple<int,int>> articleAndPiecesListInput = new List<Tuple<int,int>>();
