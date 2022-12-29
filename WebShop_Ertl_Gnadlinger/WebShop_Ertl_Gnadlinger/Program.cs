@@ -243,7 +243,7 @@ namespace WebShop_Ertl_Gnadlinger
 
                     Console.WriteLine("\nWhen you have decided on a product, enter the number and the number of pieces, of the respective product.");
                     Console.WriteLine("Enter 0, if you have finished.");
-                    List<Tuple<int, int>> artikleNumbersAndPieces = InputArticleNumbersShop(LegoShop);
+                    List<Tuple<int, int>> artikleNumbersAndPieces = InputArticleNumbersShop(LegoShop,LegoCart);
 
                     LegoCart.getProduct(artikleNumbersAndPieces, LegoShop); // method in Cart that compares the article number from the user with the shopList
 
@@ -268,7 +268,7 @@ namespace WebShop_Ertl_Gnadlinger
         }
 
         //kontrolle mit dem Warenkorb!!!!!!
-        private static List<Tuple<int,int>> InputArticleNumbersShop(Shop LegoShop)
+        private static List<Tuple<int,int>> InputArticleNumbersShop(Shop LegoShop,Cart LegoCart)
         {
             List<Tuple<int,int>> articleAndPiecesListInput = new List<Tuple<int,int>>();
 
@@ -306,10 +306,32 @@ namespace WebShop_Ertl_Gnadlinger
 
                     foreach (var item in realArticleNumbers )
                     {
-                        if(item.Item1 == InputNumberInt && item.Item2>0)
+                        if(item.Item1 == InputNumberInt && item.Item2>0 ) //es muss der warenkorb überprüft werden
                         {
-                            checkRealNumbers = true;
-                            break;
+                            foreach(var itemCart in LegoCart.CartList) //query for the shopping cart (to exclude duplication of use)
+                            {
+                                if(item.Item1 != itemCart.Item1.ArtikleNumber)
+                                {
+                                    checkRealNumbers = true;
+                                    break;
+                                }
+                                else //if the item is already in the shopping cart it must be checked that it is not selected to often
+                                {
+                                    if((item.Item2 - itemCart.Item2)>= InputNumberInt) // (Stock - Cart) >= userInput
+                                    {
+                                        checkRealNumbers = true;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Error, there are too many item's of this product selected, look in your shopping cart");
+                                    }
+
+                                }
+                                
+                            }
+
+                            
                         }
                         
                     }
