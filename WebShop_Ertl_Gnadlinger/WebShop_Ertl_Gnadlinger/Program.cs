@@ -72,14 +72,14 @@ namespace WebShop_Ertl_Gnadlinger
                 try
                 {
                     menuInput = MenuInput();      //gets the Input from the user 1,2 or 3             
-                   
+                    EndOfProgramm = MenuNaviagtion(menuInput, User, LegoShop, LegoCart);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("\n" + ex.ToString() + "\n");
                 }
 
-                EndOfProgramm = MenuNaviagtion(menuInput, User, LegoShop, LegoCart);
+                //EndOfProgramm = MenuNaviagtion(menuInput, User, LegoShop, LegoCart);
 
             } while (!EndOfProgramm);
 
@@ -217,7 +217,7 @@ namespace WebShop_Ertl_Gnadlinger
             return InputAddress;
         }
 
-        public static void ProductOverview(Customer user, Shop LegoShop, Cart LegoCart) //user Übergabe sinnvoll??
+        public static void ProductOverview(Customer user, Shop LegoShop, Cart LegoCart)
         {
             //produkte werden über klasse shop angelegt -> Oben im Main
             //Aufruf Produkte über klasse shop.product
@@ -267,7 +267,7 @@ namespace WebShop_Ertl_Gnadlinger
 
         }
 
-        //kontrolle mit dem Warenkorb!!!!!!
+        
         private static List<Tuple<int,int>> InputArticleNumbersShop(Shop LegoShop,Cart LegoCart)
         {
             List<Tuple<int,int>> articleAndPiecesListInput = new List<Tuple<int,int>>();
@@ -307,7 +307,7 @@ namespace WebShop_Ertl_Gnadlinger
 
                     foreach (var item in realArticleNumbers )
                     {
-                        if(item.Item1 == InputNumberInt && item.Item2>0 ) //es muss der warenkorb überprüft werden
+                        if (item.Item1 == InputNumberInt && item.Item2 > 0) //es muss der warenkorb überprüft werden
                         {
                             if (LegoCart.CartList.Count == 0) //shopping cart is empty
                             {
@@ -317,45 +317,37 @@ namespace WebShop_Ertl_Gnadlinger
                             else  //shopping cart is not empty
                             {
 
-                            foreach (var itemCart in LegoCart.CartList) //query for the shopping cart (to exclude duplication of use)
-                            {
+                                foreach (var itemCart in LegoCart.CartList) //query for the shopping cart (to exclude duplication of use)
+                                {
                                     remainingItems = 0;
 
-                                if (itemCart.Item1.ArtikleNumber != InputNumberInt) //the item in the shopping cart is not the same as selected
-                                {
-                                    checkRealNumbers = true;
-                                    break;
-                                }
-                                else //if the item is already in the shopping cart it must be checked that it is not selected to often
-                                {
-                                    if ((item.Item2 - itemCart.Item2) >= 1) // (Stock - Cart) >= userInput
+                                    if (itemCart.Item1.ArtikleNumber != InputNumberInt) //the item in the shopping cart is not the same as selected
                                     {
-                                        remainingItems = item.Item2 - itemCart.Item2;
                                         checkRealNumbers = true;
                                         break;
                                     }
-                                    else
+                                    else //if the item is already in the shopping cart it must be checked that it is not selected to often
                                     {
-                                        Console.WriteLine("Error, there are too many item's of this product selected, look in your shopping cart");
+                                        if ((item.Item2 - itemCart.Item2) >= 1) // (Stock - Cart) >= userInput
+                                        {
+                                            remainingItems = item.Item2 - itemCart.Item2;
+                                            checkRealNumbers = true;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Error, there are too many item's of this product selected, look in your shopping cart");
+                                        }
                                     }
-
                                 }
-
                             }
-                        }
-                       
-
-                            
-                        }
-                        
+                        }    
                     }
+
                     if (!Numbercheck||!checkRealNumbers)
                     {
                         Console.WriteLine("Error, please Enter a possible article number.");
-
-                    }
-                
-                    
+                    }                          
 
                 } while (!checkRealNumbers);
 
@@ -415,15 +407,10 @@ namespace WebShop_Ertl_Gnadlinger
                 else
                 {
                     articleAndPiecesListInput.Add(new Tuple<int, int>(InputNumberInt,InputPiecesInt));
-                }            
-                
-
+                }                            
 
             } while (!check);
-
-            
-
-          
+                    
            return articleAndPiecesListInput;
         }
 
@@ -545,12 +532,6 @@ namespace WebShop_Ertl_Gnadlinger
             }
 
             return EndOfProgramm;
-
-
         }
-
-
-
-
     }
 }
