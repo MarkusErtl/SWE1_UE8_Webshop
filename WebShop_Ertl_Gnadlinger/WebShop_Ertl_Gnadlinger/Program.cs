@@ -294,6 +294,7 @@ namespace WebShop_Ertl_Gnadlinger
                 string InputNumber = null;
                 bool checkRealNumbers = false;
                 bool checkRealPieces = false;
+                int remainingItems = 0;
                 do
                 {                           //query for the article Number Input
                     checkRealNumbers = false;
@@ -308,17 +309,28 @@ namespace WebShop_Ertl_Gnadlinger
                     {
                         if(item.Item1 == InputNumberInt && item.Item2>0 ) //es muss der warenkorb überprüft werden
                         {
-                            foreach(var itemCart in LegoCart.CartList) //query for the shopping cart (to exclude duplication of use)
+                            if (LegoCart.CartList.Count == 0) //shopping cart is empty
                             {
-                                if(item.Item1 != itemCart.Item1.ArtikleNumber)
+                                checkRealNumbers = true;
+                                break;
+                            }
+                            else  //shopping cart is not empty
+                            {
+
+                            foreach (var itemCart in LegoCart.CartList) //query for the shopping cart (to exclude duplication of use)
+                            {
+                                    remainingItems = 0;
+
+                                if (itemCart.Item1.ArtikleNumber != InputNumberInt) //the item in the shopping cart is not the same as selected
                                 {
                                     checkRealNumbers = true;
                                     break;
                                 }
                                 else //if the item is already in the shopping cart it must be checked that it is not selected to often
                                 {
-                                    if((item.Item2 - itemCart.Item2)>= InputNumberInt) // (Stock - Cart) >= userInput
+                                    if ((item.Item2 - itemCart.Item2) >= 1) // (Stock - Cart) >= userInput
                                     {
+                                        remainingItems = item.Item2 - itemCart.Item2;
                                         checkRealNumbers = true;
                                         break;
                                     }
@@ -328,8 +340,10 @@ namespace WebShop_Ertl_Gnadlinger
                                     }
 
                                 }
-                                
+
                             }
+                        }
+                       
 
                             
                         }
@@ -366,8 +380,21 @@ namespace WebShop_Ertl_Gnadlinger
                         {
                             if (item.Item2 >= InputPiecesInt && InputPiecesInt > 0  &&  item.Item2 > 0  &&  InputPiecesInt>0)
                             {
-                                checkRealPieces = true;
-                                break;
+                                if(LegoCart.CartList.Count == 0) //shopping cart is empty
+                                {
+                                    checkRealPieces = true;
+                                    break;
+                                }
+                                else if(remainingItems >= InputPiecesInt) // shopping cart is not empty
+                                {
+                                    checkRealPieces = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Error, you have selected more than available, look in your shopping cart!");
+                                }
+                               
                             }
                         }
                                         
