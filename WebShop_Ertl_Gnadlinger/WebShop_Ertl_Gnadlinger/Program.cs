@@ -123,7 +123,7 @@ namespace WebShop_Ertl_Gnadlinger
                     break;
 
                 case 3:
-                    EndOfProgramm = ShoppingCart(LegoCart, LegoShop);
+                    EndOfProgramm = ShoppingCart(LegoCart, LegoShop, user);
                     break;
 
                 case 4:
@@ -415,7 +415,7 @@ namespace WebShop_Ertl_Gnadlinger
         }
 
 
-        private static bool ShoppingCart(Cart LegoCart,Shop LegoShop)
+        private static bool ShoppingCart(Cart LegoCart,Shop LegoShop, Customer user)
         {
             bool EndOfProgramm = false;
 
@@ -451,9 +451,9 @@ namespace WebShop_Ertl_Gnadlinger
                     shipping = 10.00;
                 }
 
-                Console.WriteLine($"\n\t\t\t\t\tShipping costs:\t{shipping}\tEuro ");
+                Console.WriteLine($"\n\t\t\t\t\tshipping costs up to 50€:\t\t{shipping}\tEuro ");
                 totalPrice += shipping;
-                Console.WriteLine($"\t\t\t\t\ttotal costs:\t{Math.Round(totalPrice,2)}\tEuro");
+                Console.WriteLine($"\t\t\t\t\ttotal costs:\t\t{Math.Round(totalPrice,2)}\tEuro");
 
 
 
@@ -463,7 +463,7 @@ namespace WebShop_Ertl_Gnadlinger
                 {
                     try
                     {
-                        Console.WriteLine("\t1 - Order\n\t2 - save for later and back to the menu\n\t3 - cancel and delete the shopping cart\n\n Please Enter a number:   ");
+                        Console.WriteLine("\t1 - order\n\t2 - save for later and back to the menu\n\t3 - cancel and delete the shopping cart\n\n Please Enter a number:   ");
                         IntInput = int.Parse(Console.ReadLine());
                         success = Enum.IsDefined(typeof(EnumCart), IntInput);
 
@@ -483,32 +483,41 @@ namespace WebShop_Ertl_Gnadlinger
                 switch (IntInput)
                 {
                     case 1:
-                        Console.WriteLine("\nThank you for your order!\nSee you soon :D");
                         
-                        //reduction numbers of pieces
-                        List<Tuple<Product, int>> CartList = LegoCart.CartList;
-                        Product[] itemList = LegoShop.ShopList;
-
-                        for (int i = 0; i <itemList.Length; i++)
+                        if (user.Address == null)
                         {
-                            Product product = itemList[i];
+                            Console.Write("Error, we do not know where the product(s) should be sent to, please enter your name and address\nEnter 1 in the menu.\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nThank you for your order!\nSee you soon :D");
+                            //reduction numbers of pieces
+                            List<Tuple<Product, int>> CartList = LegoCart.CartList;
+                            Product[] itemList = LegoShop.ShopList;
 
-                            foreach (var item in CartList)
+                            for (int i = 0; i < itemList.Length; i++)
                             {
-                                if(item.Item1 == product)
+                                Product product = itemList[i];
+
+                                foreach (var item in CartList)
                                 {
-                                    int newNumberofPieces = itemList[i].NumberOfPieces - item.Item2; //the number is reduced by the number of pieces selected by the customer
+                                    if (item.Item1 == product)
+                                    {
+                                        int newNumberofPieces = itemList[i].NumberOfPieces - item.Item2; //the number is reduced by the number of pieces selected by the customer
 
-                                    itemList[i].NumberOfPieces = newNumberofPieces;
+                                        itemList[i].NumberOfPieces = newNumberofPieces;
 
+                                    }
                                 }
                             }
-                        }
-                        LegoShop.ShopList = itemList;
+                            LegoShop.ShopList = itemList;
 
-                        LegoCart.CartList.Clear();          //clears the shopping cart
-                        LegoCart.CartList = new List<Tuple<Product, int>>();
-                        //EndOfProgramm = true;
+                            LegoCart.CartList.Clear();          //clears the shopping cart
+                            LegoCart.CartList = new List<Tuple<Product, int>>();
+                            //EndOfProgramm = true;
+                        }
+
+
                         break;
 
                     case 2:
