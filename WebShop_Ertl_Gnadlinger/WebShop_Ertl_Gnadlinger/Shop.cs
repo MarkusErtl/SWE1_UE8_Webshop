@@ -27,8 +27,6 @@ namespace WebShop_Ertl_Gnadlinger
           
         }
 
-
-
         //-----methods---------
         public void refill()
         {

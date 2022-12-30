@@ -517,7 +517,6 @@ namespace WebShop_Ertl_Gnadlinger
                             //EndOfProgramm = true;
                         }
 
-
                         break;
 
                     case 2:

@@ -74,17 +74,11 @@ namespace WebShop_Ertl_Gnadlinger
             
         }
 
-
-
         //public string AddProduct(Product)
         //{
         //    //Adds a new Product
 
         //}
-
-
-
-
 
 
         public void clear()
