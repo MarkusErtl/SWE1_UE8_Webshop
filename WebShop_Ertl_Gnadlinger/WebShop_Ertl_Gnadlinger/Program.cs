@@ -409,7 +409,7 @@ namespace WebShop_Ertl_Gnadlinger
 
                 Console.WriteLine("Welcome to your Cart!\n");
                 Console.BackgroundColor = ConsoleColor.Red;
-                Console.WriteLine("\tnumber\t\ttitle\t\ttype\t\tprice\t\tin stock\tselected");
+                Console.WriteLine("\tnumber\t\ttitle\t\ttype\t\t\tprice\t\t\tin stock\tselected");
                 Console.BackgroundColor = ConsoleColor.Black;
 
                 double totalPrice = 0;
@@ -430,9 +430,9 @@ namespace WebShop_Ertl_Gnadlinger
                     shipping = 10.00;
                 }
 
-                Console.WriteLine($"\n\t\t\t\t\tshipping costs up to 50€:\t\t{shipping}\tEuro ");
+                Console.WriteLine($"\n\t\t\t\t\tshipping costs up to 50€:\t{shipping}\tEuro ");
                 totalPrice += shipping;
-                Console.WriteLine($"\t\t\t\t\ttotal costs:\t\t{Math.Round(totalPrice,2)}\tEuro");
+                Console.WriteLine($"\t\t\t\t\ttotal costs:\t\t\t{Math.Round(totalPrice,2)}\tEuro");
 
 
 
