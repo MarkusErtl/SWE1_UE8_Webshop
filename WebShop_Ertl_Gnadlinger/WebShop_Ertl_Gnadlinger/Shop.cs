@@ -52,6 +52,14 @@ namespace WebShop_Ertl_Gnadlinger
             _shopList[0] = item1;
             _shopList[1] = item2;
             _shopList[2] = item3;
+            _shopList[3] = item4;
+            _shopList[4] = item5;
+            _shopList[5] = item6; 
+            _shopList[6] = item7;
+            _shopList[7] = item8;
+            _shopList[8] = item9;
+            _shopList[9] = item10;
+            
 
 
         }
