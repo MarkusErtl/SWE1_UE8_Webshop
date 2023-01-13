@@ -64,7 +64,7 @@ namespace WebShop_Ertl_Gnadlinger
 
         public override string ToString()
         {
-            return "\t"+_artikelNumber +"\t\t"+_title+"\t\t"+_type+"\t\t"+_price+"\t\t"+_numberOfPieces;
+            return "\t"+_artikelNumber +"\t\t"+_title+"\t\t"+_type+"\t\t\t"+_price+"\t\t\t"+_numberOfPieces;
         }
 
 

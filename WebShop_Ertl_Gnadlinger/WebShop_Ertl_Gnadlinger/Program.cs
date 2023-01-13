@@ -32,6 +32,7 @@ namespace WebShop_Ertl_Gnadlinger
 
             // - natürlich überschneiden sich die meisten Bereiche -> es wurden mehrere Funktionen im austausch entwickelt.
 
+            // - Notiz: Durch einfügen der Daten sind in der Ausgabe die Tabellen verschoben
 
 
             Customer User = new Customer(null, null);    //creates a default customer
@@ -208,7 +209,7 @@ namespace WebShop_Ertl_Gnadlinger
 
 
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("\tnumber\t\ttitle\t\ttype\t\tprice\t\tin stock");
+                Console.WriteLine("\tnumber\t\ttitle\t\ttype\t\t\tprice\t\t\tin stock");
                 Console.BackgroundColor = ConsoleColor.Black;
 
                 try
