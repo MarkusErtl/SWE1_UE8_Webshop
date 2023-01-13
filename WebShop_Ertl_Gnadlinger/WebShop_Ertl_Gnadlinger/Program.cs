@@ -27,33 +27,11 @@ namespace WebShop_Ertl_Gnadlinger
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            //---------------------------------------------
-            //Menu:
-            //    - Nutzerdaten ändern
+           // Ertl Markus       s2210438006     Main mit allen funktionen
+           // Gnadlinger Oskar  s2210438007     alle Klassen (Shop, Product, Customer, Cart)
 
-            //    - Productübersicht
-            //        + Produkte warenkorb hinzufügen
+            // - natürlich überschneiden sich die meisten Bereiche -> es wurden mehrere Funktionen im austausch entwickelt.
 
-            //    - Warenkorb
-            //        + Löschen
-            //        + Bestellen
-            //            * Bestellübersicht
-            //                # Bestätigen
-            //                # Abbrechen
-            //-----------------------------------------------
-
-            //----------Notes:
-            // - EnterChangeUser funktion: aufteilen in 2 segmente, neue eingabe und ersetzen -> sonst bei fehler-Wiederholung werden bereits neue daten angezeigt
-
-
-
-           // - nach dem abspeichern vom warenkorb kann der artikel erneut mit der gleichen anzahl in den warenkorb gelegt werden
-           
-
-
-
-            //-Oskar:
-            //-in klasse customer: beide eingangsüberprüfungen
 
 
             Customer User = new Customer(null, null);    //creates a default customer
